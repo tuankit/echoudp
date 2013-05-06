@@ -2,6 +2,10 @@
 
 
 
+#define ECHO_PORT  8000
+
+
+
 class SocketAddress {
 
 public:	
@@ -59,6 +63,11 @@ public:
 	bool Bind(SocketAddress &sa);
 
 	int ErrorCode () { return WSAGetLastError(); }
+
+	void Close() { 
+		if(m_socket != INVALID_SOCKET)	
+		closesocket(m_socket); 
+	} 
 
 	Socket(void);
 	virtual ~Socket(void);
