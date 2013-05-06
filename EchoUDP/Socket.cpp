@@ -7,6 +7,8 @@ Socket::Socket(void)
 	WSADATA wsaData;
 	init = WSAStartup(0x202, &wsaData) == 0;
 
+	m_socket = INVALID_SOCKET;
+
 }
 
 Socket::~Socket(void)
@@ -48,8 +50,8 @@ int UDPSocket::SendTo( const char* buffer,int len, SocketAddress & address )
 
 int UDPSocket::RecvFrom( char * buffer, int len, sockaddr_in *from )
 {
-	int fromlen = 0;
-	return recvfrom(m_socket,buffer,len,0,(sockaddr *)from,&fromlen);
+	int fromlen = sizeof(sockaddr_in);
+	return recvfrom( m_socket,buffer,len,0,(sockaddr *)from,&fromlen);
 }
 
 int UDPSocket::RecvFrom( char * buffer, int len, SocketAddress &from )

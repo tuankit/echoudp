@@ -1,0 +1,31 @@
+//  Windows Sockets, structs and functions
+// --------------------------------------
+
+// Init/Cleanup
+// ------------
+Init:
+		WSADATA wsaData;
+		init = WSAStartup(0x202, &wsaData) == 0;
+		
+Cleanup:
+		int WSACleanup (void);
+
+create/close:
+		SOCKET m_socket = socket(AF_INET,SOCK_DGRAM ,0 ); //UDP
+		SOCKET m_socket = socket(AF_INET,SOCK_STREAM  ,0 ); //TCP
+		
+bind:
+		int bind(SOCKET s, const struct sockaddr FAR* name, int namelen);
+				
+send:
+		int sendto(m_socket,buffer,len,0,(const sockaddr*)reciver,sizeof(sockaddr_in));
+		
+recieve:
+		int fromLen = sizeof(sockaddr_in);
+		int recvfrom(m_socket,buffer,len,0,(sockaddr*)from,&fromLen);
+		
+structs:
+		sockaddr_in ;
+		
+helpers:
+		int WSAGetLastError();
